@@ -12,11 +12,11 @@ body{
 
 .todo-grid,
 .todo-input-grid,
-.filter-todo-show {
+.filter-todo-show,
+.filter-section{
   display: grid;
   grid-template-columns: 200px 150px 250px  200px 100px 100px 100px;
   column-gap: 10px;
-  
   align-items: center;
 }
 
@@ -45,9 +45,26 @@ body{
 }
 
 .name-input,
-.due-date-input{
+.due-date-input,
+.filter-name-input,
+.filter-date-input{
   font-size: 15px;
   padding: 6px;
+}
+
+.name-input,
+.description-input,
+.image-input,
+.quantity-input {
+  color: green;
+}
+
+.due-date-input{
+  color: red;
+}
+
+.image-input{
+  padding: 10px;
 }
 
 .total-todo{
@@ -84,14 +101,29 @@ body{
   align-items: start;
   pointer-events: none; /* Prevent mouse events */
   user-select: none; /* Prevent text selection */
+  
+}
+.description-display,
+.brand-name-display,
+.quantity-display{
+  color: green;
 }
 
-.add-todo-button{
+.due-date-name-display{
+  color: red;
+}
+
+.add-todo-button,
+.filter-button{
   background-color: green;
   color: white;
   border: none;
   font-size: 15px;
   cursor: pointer;
+}
+
+.filter-button{
+  padding: 8px;
 }
 
 .delete-todo-button,
@@ -103,7 +135,10 @@ body{
   cursor: pointer;
   padding-top: 10px;
   padding-bottom: 10px;
+ 
 }
+
+
 
 
 /* Base styles are defined for desktop views */
@@ -132,7 +167,9 @@ body{
 .js-todo-image-input,
 .description-input,
 .quantity-input,
-.image-input
+.image-input,
+.filter-name-input,
+.filter-date-input
  {
   width: calc(50% - 20px); /* Adjust width to 100% of container width minus 20px for padding */
 }
@@ -149,5 +186,8 @@ body{
 
 .todo-grid img:hover {
   transform: scale(1.2); /* Adjust the scaling factor for mobile screens */
+}
+.image-input{
+  padding: 0px;
 }
 }

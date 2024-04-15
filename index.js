@@ -97,8 +97,8 @@ function renderTodoList() {
   const todoListHTML = todoList.map((todoObject, index) => {
     const { name, dueDate, description, imageUrl, quantity  } = todoObject;
     return `
-      <div>${name}</div> 
-      <div >${dueDate}</div>
+      <div class="brand-name-display">${name}</div> 
+      <div class="due-date-name-display">${dueDate}</div>
       <div class="description-display">${description}</div>
       <div>${imageUrl ? `<img src="${imageUrl}" alt="Todo Image">` : 'No Image'}</div>
       <div class="quantity-display">${quantity} quantity</div>
@@ -172,6 +172,9 @@ function addTodo() {
 
   const quantityInputElement = document.querySelector('.js-quantity-input');
   const quantity = quantityInputElement.value;
+
+
+
 
   if (imageFile) {
     const reader = new FileReader();
