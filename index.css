@@ -29,6 +29,11 @@ body{
 .filter-todo-show img {
   width: 200px; /* or any size that fits your layout */
   height: 150px;
+  transition: transform 0.3s ease;
+}
+
+.todo-grid img:hover {
+  transform: scale(1.8); /* Adjust the scaling factor to your preference */
 }
 
 
