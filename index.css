@@ -110,6 +110,10 @@ body{
 
 
 @media (max-width: 768px) {
+
+  body{
+    margin-left: 10px;
+  }
   .todo-input-grid,
   .todo-grid,
   .filter-todo-show,
@@ -127,9 +131,10 @@ body{
 .due-date-input,
 .js-todo-image-input,
 .description-input,
-.quantity-input
+.quantity-input,
+.image-input
  {
-  width: calc(30% - 20px); /* Adjust width to 100% of container width minus 20px for padding */
+  width: calc(50% - 20px); /* Adjust width to 100% of container width minus 20px for padding */
 }
 .add-todo-button,
 .filter-button,
@@ -140,5 +145,9 @@ body{
 
 .add-todo-button{
   height: 40px;
+}
+
+.todo-grid img:hover {
+  transform: scale(1.2); /* Adjust the scaling factor for mobile screens */
 }
 }
