@@ -41,7 +41,7 @@ body{
 .heading{
   color: green;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .name-input,
@@ -166,12 +166,15 @@ body{
 .due-date-input,
 .js-todo-image-input,
 .description-input,
-.quantity-input,
 .image-input,
 .filter-name-input,
 .filter-date-input
  {
-  width: calc(50% - 20px); /* Adjust width to 100% of container width minus 20px for padding */
+  width: calc(80% - 20px); /* Adjust width to 100% of container width minus 20px for padding */
+}
+
+.quantity-input{
+  width: calc(40% - 20px);
 }
 .add-todo-button,
 .filter-button,
