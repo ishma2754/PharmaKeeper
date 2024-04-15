@@ -1,0 +1,139 @@
+body{
+  background-color: lightblue;
+  font-family: Arial;
+  margin-bottom: 50px;
+}
+
+.whole-page-grid{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
+.todo-grid,
+.todo-input-grid,
+.filter-todo-show {
+  display: grid;
+  grid-template-columns: 200px 150px 250px  200px 100px 100px 100px;
+  column-gap: 10px;
+  
+  align-items: center;
+}
+
+.todo-input-grid{
+  margin-bottom: 10px;
+  align-items: stretch;
+}
+
+.todo-grid img,
+.filter-todo-show img {
+  width: 200px; /* or any size that fits your layout */
+  height: 150px;
+}
+
+
+
+.heading{
+  color: green;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.name-input,
+.due-date-input{
+  font-size: 15px;
+  padding: 6px;
+}
+
+.total-todo{
+  font-size: 20px;
+  font-weight: bold;
+}
+.earliest-todo{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.description-input {
+  font-size: 15px;
+  padding: 6px;
+  resize: vertical;
+  min-height: 28px;
+  max-height: 28px;
+  min-width: 200px;
+  max-width: 250px;
+  
+}
+
+.description-display
+ {
+  font-size: 15px;
+  padding: 6px;
+  min-height: auto; /* Same as the min-height of the textarea */
+  max-height: 150px; /* Same as the max-height of the textarea */
+  min-width: 200px; /* Same as the min-width of the textarea */
+  max-width: 250px; /* Same as the max-width of the textarea */
+  border: 1px solid #ccc;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden;
+  align-items: start;
+  pointer-events: none; /* Prevent mouse events */
+  user-select: none; /* Prevent text selection */
+}
+
+.add-todo-button{
+  background-color: green;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.delete-todo-button,
+.edit-todo-button{
+  background-color: darkred;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+/* Base styles are defined for desktop views */
+
+
+@media (max-width: 768px) {
+  .todo-input-grid,
+  .todo-grid,
+  .filter-todo-show,
+  .filter-section
+ {
+    grid-template-columns: 1fr; /* Changes layout to single column */
+    gap: 5px; /* Adjusts spacing for smaller screens */
+  }
+
+  .whole-page-grid {
+    grid-template-rows: auto; /* Makes it more fluid for stacking */
+  }
+
+.name-input,
+.due-date-input,
+.js-todo-image-input,
+.description-input,
+.quantity-input
+ {
+  width: calc(30% - 20px); /* Adjust width to 100% of container width minus 20px for padding */
+}
+.add-todo-button,
+.filter-button,
+.delete-todo-button,
+.edit-todo-button {
+  width: calc(30% - 8px); /* Adjust width to 100% of container width minus 20px for padding */
+}
+
+.add-todo-button{
+  height: 40px;
+}
+}

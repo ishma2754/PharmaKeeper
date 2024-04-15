@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo list</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <p class="heading">
+    PharmaKeeper
+  </p>
+  <div class="summary-section">
+    <p class="total-todo">Total Medicines: <span class="js-total-todos"></span></p>
+    <p class="earliest-todo"><span class="js-earliest-todo"></span></p>
+  </div>
+
+  <!--create these input elements in a div-->
+  <!--make this div in a grid-->
+<div class="whole-page-grid">
+
+
+
+
+ <div class="todo-page">
+  <div class="todo-input-grid">
+
+    <input placeholder="Brand Name" class="js-name-input name-input">
+
+    <input type="date" class="js-due-date-input due-date-input">
+
+    <textarea placeholder="Compound description" class="js-description-input description-input"></textarea>
+    <input type="file" class="js-todo-image-input" accept="image/*">
+    <input type="number" class="js-quantity-input quantity-input" placeholder="Quantity">
+
+   
+
+    <button class="add-todo-button js-add-todo-button">
+      Add
+    </button>
+  </div>
+
+  <!---we cannot have paragraph inside other paragraph so we use div which is  a block element-->
+  <!--div element doesn't have extra spacing above or below in oppose to paragraph-->
+  <div class="js-todo-list todo-grid"></div>
+  
+
+ </div>
+
+
+ <div class="filter-show">
+  <div class="filter-section">
+    <input type="text" class="js-filter-name-input" placeholder="Filter by name">
+    <input type="date" class="js-filter-date-input">
+    <button class="filter-button js-filter-button">Filter</button>
+  </div>
+
+<!-- Summary section -->
+ 
+
+  <div class="js-filter-todo filter-todo-show"></div>
+
+</div>
+
+</div>
+
+
+  <script src="index.js"></script>
+</body>
+</html>
+
+
+
+
+
