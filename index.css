@@ -8,6 +8,12 @@ body{
   
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .whole-page-grid{
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -20,8 +26,9 @@ body{
 .filter-section{
   display: grid;
   grid-template-columns: 200px 150px 250px  200px 100px 100px 100px;
-  column-gap: 10px;
+  gap: 10px;
   align-items: center;
+  margin-top: 10px;
 }
 
 .todo-input-grid{
@@ -164,6 +171,7 @@ body{
   align-items: start;
   pointer-events: none; /* Prevent mouse events */
   user-select: none; /* Prevent text selection */
+  border: none;
   
 }
 .description-display,
@@ -220,8 +228,15 @@ body{
   body{
     margin-left: 10px;
   }
+
+  .summary-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .todo-input-grid,
-  .todo-grid,
   .filter-todo-show,
   .filter-section
  {
@@ -229,15 +244,20 @@ body{
     gap: 20px; /* Adjusts spacing for smaller screens */
   }
 
+
+
   .todo-grid,
   .filter-todo-show{
+    grid-template-columns: 1fr; /* Changes layout to single column */
+    gap:20px;
     margin-top: 30px;
-    background-color:  lightgray;
     padding: 10px;
     border-radius: 20px;
   }
 
   .whole-page-grid {
+    justify-content: center;
+    align-items: center;
     grid-template-rows: auto;
     gap: 50px; /* Makes it more fluid for stacking */
   }
@@ -252,6 +272,14 @@ body{
  {
   width: calc(80% - 20px); /* Adjust width to 100% of container width minus 20px for padding */
 }
+
+.description-display,
+.brand-name-display,
+.quantity-display{
+  color: white;
+  
+}
+
 
 .quantity-input{
   width: calc(40% - 20px);

@@ -4,7 +4,7 @@ renderTodoList();
 
 
 
-document.querySelector('.js-filter-button').addEventListener('click', () => {
+function applyFilter() {
   const nameFilter = document.querySelector('.js-filter-name-input').value.toLowerCase();
   const dateFilter = document.querySelector('.js-filter-date-input').value;
 
@@ -12,11 +12,18 @@ document.querySelector('.js-filter-button').addEventListener('click', () => {
     const nameMatch = todo.name.toLowerCase().includes(nameFilter);
     const dateMatch = todo.dueDate.includes(dateFilter); // Assuming dueDate is always present
 
-    return nameMatch && dateMatch;
-  });
-    
-  renderFilterList(filteredTodos);
+    return nameMatch && dateMatch;});
+
+    renderFilterList(filteredTodos);
+
+};
+
+
+
+document.querySelector('.js-filter-button').addEventListener('click', () => {
+  applyFilter();
 });
+
 
 // Render summary
 /*function renderSummary(filteredTodos) {
@@ -33,30 +40,14 @@ function renderFilterList(filteredTodos = todoList) {
       <div class="due-date-name-display">${dueDate}</div>
       <div class="description-display">${description}</div>
       <div>${imageUrl ? `<img src="${imageUrl}" alt="Todo Image">` : 'No Image'}</div>
-      <input type="number" class="js-quantity-input quantity-input" value="${quantity}" placeholder="Quantity">
-      <button class="delete-todo-button js-filter-delete-todo-button">Delete</button>`;
+      <div class="quantity-display">${quantity} quantity</div>`;
   }).join('');
 
   document.querySelector('.js-filter-todo').innerHTML = filterListHTML;
 
-  // Render summary
- // renderSummary();
-
-  // Attach event listeners for delete and edit buttons
-  document.querySelectorAll('.js-filter-delete-todo-button').forEach((deleteButton, index) => {
-    deleteButton.addEventListener('click', () => {
-      deleteTodo(index);
-    });
-  });
-
 }
 
-// Function to delete a todo
-function deleteTodo(index) {
-  todoList.splice(index, 1);
-  //localStorage.setItem('todoList', JSON.stringify(todoList));
-  renderFilterList();
-}
+
 
 
 
@@ -105,7 +96,8 @@ function renderTodoList() {
       <div>${imageUrl ? `<img src="${imageUrl}" alt="Todo Image">` : 'No Image'}</div>
       <div class="quantity-display">${quantity} quantity</div>
       <button class="delete-todo-button js-delete-todo-button">Delete</button>
-      <button class="edit-todo-button js-edit-todo-button">Edit</button>`;
+      <button class="edit-todo-button js-edit-todo-button">Edit</button>
+      `;
   }).join(''); 
 
   document.querySelector('.js-todo-list')
@@ -120,6 +112,7 @@ function renderTodoList() {
       todoList.splice(index, 1);
       localStorage.setItem('todoList', JSON.stringify(todoList))
       renderTodoList();
+      applyFilter();
     });
    });
 
@@ -129,6 +122,7 @@ function renderTodoList() {
       populateInputFields(todoToEdit);
       todoList.splice(index, 1);
       renderTodoList();
+      applyFilter();
     });
   });
   
@@ -189,8 +183,8 @@ function addTodo() {
       dateInputElement.value = '';
       document.querySelector('.js-todo-image-input').value = '';
       quantityInputElement.value = '';
-
       renderTodoList();
+      //renderTodoList();
     };
     reader.readAsDataURL(imageFile);
   } else {
@@ -202,6 +196,7 @@ function addTodo() {
     document.querySelector('.js-todo-image-input').value = '';
     quantityInputElement.value = '';
     renderTodoList();
+    //renderTodoList();
   }
 }
 
