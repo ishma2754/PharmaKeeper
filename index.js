@@ -29,12 +29,11 @@ function renderFilterList(filteredTodos = todoList) {
   const filterListHTML = filteredTodos.map((todoObject, index) => {
     const { name, dueDate, description, imageUrl, quantity } = todoObject;
     return `
-      <div>${name}</div> 
-      <div>${dueDate}</div>
+      <div class="brand-name-display">${name}</div> 
+      <div class="due-date-name-display">${dueDate}</div>
       <div class="description-display">${description}</div>
       <div>${imageUrl ? `<img src="${imageUrl}" alt="Todo Image">` : 'No Image'}</div>
       <input type="number" class="js-quantity-input quantity-input" value="${quantity}" placeholder="Quantity">
-      <input type="number" class="js-quantity-input quantity-input" placeholder="Quantity">
       <button class="delete-todo-button js-filter-delete-todo-button">Delete</button>`;
   }).join('');
 
@@ -70,9 +69,12 @@ function renderSummary(todoList) {
   
     const earliestTodo = findEarliestDueTodo(todoList);
     if (earliestTodo) {
-      document.querySelector('.js-earliest-todo').textContent = `Earliest Expiry: ${earliestTodo.name}, Due on: ${earliestTodo.dueDate}`;
+      //document.querySelector('.js-earliest-todo').textContent = `Earliest Expiry: `;
+
+      document.querySelector('.js-earliest-todo').innerHTML = `Earliest Expiry:<span class="earliest-name">${earliestTodo.name}</span>, Due on: <span class="earliest-date">${earliestTodo.dueDate}</span>`;
+      //document.querySelector('.js-earliest-todo').textContent = `Earliest Expiry: ${earliestTodo.name}, Due on: ${earliestTodo.dueDate}`;
     } else {
-      document.querySelector('.js-earliest-todo').textContent = "No medicines found.";
+      document.querySelector('.js-earliest-todo').innerHTML = `<span class="earliest-name">No medicines found.</span>`;
     }
   }
   
