@@ -238,11 +238,10 @@ body{
   }
 
   .todo-input-grid,
-  .filter-todo-show,
   .filter-section
  {
     grid-template-columns: 1fr; /* Changes layout to single column */
-    gap: 20px;
+    gap: 10px;
      /* Adjusts spacing for smaller screens */
   }
 
@@ -287,7 +286,6 @@ body{
   }
 
   .todo-input-grid,
-  .filter-todo-show,
   .filter-section
  {
     grid-template-columns: 1fr; /* Changes layout to single column */
