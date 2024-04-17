@@ -19,7 +19,7 @@ body{
   align-items: center;
   background-color: black;
   color: white;
-  padding: 25px 60px;
+  padding: 25px 25px;
   margin-bottom: 30px;
   font-size: 25px;
 }
@@ -241,6 +241,13 @@ body{
 
 
 @media (max-width: 768px) {
+
+
+  .navbar{
+    font-size: 15px;
+    padding: 5px 5px;
+    width: 100%;
+  }
 
   .whole-page-grid {
     justify-content: center;
