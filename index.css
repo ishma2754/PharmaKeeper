@@ -248,7 +248,7 @@ body{
 
 
 
-@media (max-width: 768px)  (orientation: landscape) {
+@media (max-width: 768px) and (orientation: landscape) {
 
 
   .navbar{
@@ -296,7 +296,7 @@ body{
  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) and and (orientation: landscape) {
 
 
   .navbar{
