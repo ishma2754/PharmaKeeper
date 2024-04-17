@@ -237,6 +237,15 @@ body{
     grid-template-columns: repeat(2, 223px);
   }
 
+  .todo-input-grid,
+  .filter-todo-show,
+  .filter-section
+ {
+    grid-template-columns: 1fr; /* Changes layout to single column */
+    gap: 20px;
+     /* Adjusts spacing for smaller screens */
+  }
+
   
   .navbar{
     font-size: 15px;
@@ -248,7 +257,7 @@ body{
 
 
 
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 768px) and (orientation: landscape){
 
 
   .navbar{
@@ -296,7 +305,7 @@ body{
  }
 }
 
-@media (max-width: 480px) and and (orientation: landscape) {
+@media (max-width: 480px) and (orientation: landscape){
 
 
   .navbar{
