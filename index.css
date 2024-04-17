@@ -33,7 +33,7 @@ body{
 
 
 
-.todo-input-grid,
+.medicines-input-grid,
 .filter-section{
   justify-content: center;
   align-items: center;
@@ -44,8 +44,8 @@ body{
   margin-top: 10px;
 }
 
-.todo-grid,
-.filter-todo-show{
+.medicines-grid-display,
+.filter-medicines-show{
   display: grid;
   grid-template-columns: repeat(4, 230px);
   gap: 30px;
@@ -148,11 +148,11 @@ body{
   font-size: 15px;
 }
 
-.total-todo{
+.total-medicines{
   font-size: 20px;
   font-weight: bold;
 }
-.earliest-todo{
+.earliest-expiry{
   font-size: 20px;
   font-weight: bold;
 }
@@ -202,7 +202,7 @@ body{
   font-size: 18px;
 }
 
-.add-todo-button,
+.add-medicines-button,
 .filter-button{
   background-color: green;
   color: white;
@@ -217,8 +217,8 @@ body{
 
   
 
-.delete-todo-button,
-.edit-todo-button{
+.delete-medicines-button,
+.edit-medicines-button{
   background-color: rgb(254, 160, 10);
   color: white;
   border: none;
@@ -232,12 +232,12 @@ body{
 }
 
 @media (max-width: 1000px) {
-  .todo-grid,
-  .filter-todo-show{
+  .medicines-grid-display,
+  .filter-medicines-show{
     grid-template-columns: repeat(2, 223px);
   }
 
-  .todo-input-grid,
+  .medicines-input-grid,
   .filter-section
  {
     grid-template-columns: 1fr; /* Changes layout to single column */
@@ -272,8 +272,8 @@ body{
     margin-right: 10px;
   }
 
-  .todo-grid,
-  .filter-todo-show{
+  .medicines-grid-display,
+  .filter-medicines-show{
     grid-template-columns: repeat(1, 223px);
   }
 
@@ -285,7 +285,7 @@ body{
     margin: 0 auto; /* Center the cart item if you're using width less than 100% */
   }
 
-  .todo-input-grid,
+  .medicines-input-grid,
   .filter-section
  {
     grid-template-columns: 1fr; /* Changes layout to single column */
@@ -297,7 +297,7 @@ body{
   transform: scale(1.2);
  }
 
- .add-todo-button{
+ .add-medicines-button{
   padding-top: 10px;
   padding-bottom: 10px;
  }

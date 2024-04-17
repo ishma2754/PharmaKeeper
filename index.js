@@ -1,6 +1,6 @@
-const todoList = JSON.parse(localStorage.getItem('todoList')) || [];
+const medicinesList = JSON.parse(localStorage.getItem('medicinesList')) || [];
 
-renderTodoList();
+renderMedicinesList();
 
 
 
@@ -12,16 +12,16 @@ function applyFilter() {
   const dateFilterElement = document.querySelector('.js-filter-date-input')
 
 
-  const filteredTodos = todoList.filter(todo => {
-    const nameMatch = todo.name.toLowerCase().includes(nameFilter);
-    const dateMatch = todo.dueDate.includes(dateFilter); // Assuming dueDate is always present
+  const filteredMedicines = medicinesList.filter(medicines => {
+    const nameMatch = medicines.name.toLowerCase().includes(nameFilter);
+    const dateMatch = medicines.dueDate.includes(dateFilter); // Assuming dueDate is always present
 
     return nameMatch && dateMatch;});
 
     nameFilterElement.value = '';
     dateFilterElement.value = '';
 
-    renderFilterList(filteredTodos);
+    renderFilterList(filteredMedicines);
  
 
 };
@@ -33,29 +33,25 @@ document.querySelector('.js-filter-button').addEventListener('click', () => {
 });
 
 
-// Render summary
-/*function renderSummary(filteredTodos) {
-  const totalTodos = filteredTodos.length;
-  document.querySelector('.js-total-todos').textContent = totalTodos;
-}*/
 
-function renderFilterList(filteredTodos = todoList) {
-  // Render filteredTodos instead of todoList
-  const filterListHTML = filteredTodos.map((todoObject, index) => {
-    const { name, dueDate, description, imageUrl, quantity } = todoObject;
+
+function renderFilterList(filteredMedicines = medicinesList) {
+  
+  const filterListHTML = filteredMedicines.map((medicinesObject, index) => {
+    const { name, dueDate, description, imageUrl, quantity } = medicinesObject;
     return `
       <div class="details">
       <div class="brand-name-display">${name}</div> 
       <div class="due-date-name-display">${dueDate}</div>
       <div class="description-display">${description}</div>
-      <div class="image-container">${imageUrl ? `<img width="220" src="${imageUrl}" alt="Todo Image">` : 'No Image'}</div>
+      <div class="image-container">${imageUrl ? `<img width="220" src="${imageUrl}" alt="medicine-Image">` : 'No Image'}</div>
       <div class="quantity-display">${quantity} quantity</div>
       </div>`;
   }).join('');
 
 
 
-  document.querySelector('.js-filter-todo').innerHTML = filterListHTML;
+  document.querySelector('.js-filter-medicines').innerHTML = filterListHTML;
 
 }
 
@@ -63,109 +59,109 @@ function renderFilterList(filteredTodos = todoList) {
 
 
 
-function renderSummary(todoList) {
-  const totalTodos = todoList.length;
-  document.querySelector('.js-total-todos').textContent = totalTodos;
-  function renderSummary(todoList) {
-    const totalTodos = todoList.length;
-    document.querySelector('.js-total-todos').textContent = totalTodos;
+function renderSummary(medicinesListList) {
+  const totalMedicines = medicinesList.length;
+  document.querySelector('.js-total-medicines').textContent = totalMedicines;
+  function renderSummary(medicinesList) {
+    const totalMedicines = medicinesList.length;
+    document.querySelector('.js-total-medicines').textContent = totalMedicines;
   
-    const earliestTodo = findEarliestDueTodo(todoList);
-    if (earliestTodo) {
-      //document.querySelector('.js-earliest-todo').textContent = `Earliest Expiry: `;
+    const earliestMedicines = findEarliestDueMedicines(medicinesList);
+    if (earliestMedicines) {
+      
 
-      document.querySelector('.js-earliest-todo').innerHTML = `Earliest Expiry:<span class="earliest-name">${earliestTodo.name}</span>, Due on: <span class="earliest-date">${earliestTodo.dueDate}</span>`;
-      //document.querySelector('.js-earliest-todo').textContent = `Earliest Expiry: ${earliestTodo.name}, Due on: ${earliestTodo.dueDate}`;
+      document.querySelector('.js-earliest-expiry').innerHTML = `Earliest Expiry:<span class="earliest-name">${earliestMedicines.name}</span>, Due on: <span class="earliest-date">${earliestMedicines.dueDate}</span>`;
+     
     } else {
-      document.querySelector('.js-earliest-todo').innerHTML = `<span class="earliest-name">No medicines found.</span>`;
+      document.querySelector('.js-earliest-expiry').innerHTML = `<span class="earliest-name">No medicines found.</span>`;
     }
   }
   
-  function findEarliestDueTodo(todoList) {
-    if (todoList.length === 0) {
+  function findEarliestDueMedicines(medicinesList) {
+    if (medicinesList.length === 0) {
       return null;
     }
   
-    return todoList.reduce((earliest, currentTodo) => {
+    return medicinesList.reduce((earliest, currentMedicines) => {
       const earliestDueDate = new Date(earliest.dueDate);
-      const currentDueDate = new Date(currentTodo.dueDate);
-      return earliestDueDate < currentDueDate ? earliest : currentTodo;
+      const currentDueDate = new Date(currentMedicines.dueDate);
+      return earliestDueDate < currentDueDate ? earliest : currentMedicines;
     });
   }
   
   // Call renderSummary function in your code
-  renderSummary(todoList);
+  renderSummary(medicinesList);
 }
 
 
-function renderTodoList() {
-  const todoListHTML = todoList.map((todoObject, index) => {
-    const { name, dueDate, description, imageUrl, quantity  } = todoObject;
+function renderMedicinesList() {
+  const medicinesListHTML = medicinesList.map((medicinesObject, index) => {
+    const { name, dueDate, description, imageUrl, quantity  } = medicinesObject;
     return `
     <div class="details">
       <div class="brand-name-display">${name}</div> 
       <div class="due-date-name-display">${dueDate}</div>
       <div class="description-display">${description}</div>
-      <div class="image-container">${imageUrl ? `<img src="${imageUrl}" alt="Todo Image">` : 'No Image'}</div>
+      <div class="image-container">${imageUrl ? `<img src="${imageUrl}" alt="medicine-Image">` : 'No Image'}</div>
       <div class="quantity-display">${quantity} quantity</div>
-      <button class="delete-todo-button js-delete-todo-button">Delete</button>
-      <button class="edit-todo-button js-edit-todo-button">Edit</button>
+      <button class="delete-medicines-button js-delete-medicines-button">Delete</button>
+      <button class="edit-medicines-button js-edit-medicines-button">Edit</button>
     </div>
       `;
   }).join(''); 
 
-  document.querySelector('.js-todo-list')
-  .innerHTML = todoListHTML;
+  document.querySelector('.js-medicines-grid-display')
+  .innerHTML = medicinesListHTML;
 
-  renderSummary(todoList);
+  renderSummary(medicinesList);
 
   //all will give us all the elements on the page that have class delete-button
-  document.querySelectorAll('.js-delete-todo-button')
+  document.querySelectorAll('.js-delete-medicines-button')
    .forEach((deleteButton, index) => {
     deleteButton.addEventListener('click', () => {
-      todoList.splice(index, 1);
-      localStorage.setItem('todoList', JSON.stringify(todoList))
-      renderTodoList();
+      medicinesList.splice(index, 1);
+      localStorage.setItem('medicinesList', JSON.stringify(medicinesList))
+      renderMedicinesList();
       applyFilter();
     });
    });
 
-   document.querySelectorAll('.js-edit-todo-button').forEach((editButton, index) => {
+   document.querySelectorAll('.js-edit-medicines-button').forEach((editButton, index) => {
     editButton.addEventListener('click', () => {
-      const todoToEdit = todoList[index];
-      populateInputFields(todoToEdit);
-      todoList.splice(index, 1);
-      renderTodoList();
+      const medicinesToEdit = medicinesList[index];
+      populateInputFields(medicinesToEdit);
+      medicinesList.splice(index, 1);
+      renderMedicinesList();
       applyFilter();
     });
   });
   
   
-  function populateInputFields(todo) {
+  function populateInputFields(medicines) {
   const inputElement = document.querySelector('.js-name-input');
-  inputElement.value = todo.name;
+  inputElement.value = medicines.name;
   
   const dateInputElement = document.querySelector('.js-due-date-input');
-  dateInputElement.value = todo.dueDate;
+  dateInputElement.value = medicines.dueDate;
   
   const descriptionInputElement = document.querySelector('.js-description-input');
-  descriptionInputElement.value = todo.description;
+  descriptionInputElement.value = medicines.description;
 
   const quantityInputElement = document.querySelector('.js-quantity-input');
-  quantityInputElement.value = todo.quantity;
+  quantityInputElement.value = medicines.quantity;
   }
 
 }
 
 
 
-document.querySelector('.js-add-todo-button')
+document.querySelector('.js-add-medicines-button')
  .addEventListener('click', () => {
-    addTodo();
+    addMedicines();
  });
 
 
-function addTodo() {
+function addMedicines() {
   const inputElement = document.querySelector('.js-name-input');
   const name = inputElement.value;
 
@@ -178,7 +174,7 @@ function addTodo() {
   const description = descriptionInputElement.value;
 
 
-  const imageFile = document.querySelector('.js-todo-image-input').files[0];
+  const imageFile = document.querySelector('.js-medicines-image-input').files[0];
 
   const quantityInputElement = document.querySelector('.js-quantity-input');
   const quantity = quantityInputElement.value;
@@ -190,27 +186,27 @@ function addTodo() {
     const reader = new FileReader();
     reader.onload = function(e) {
       const imageUrl = e.target.result;
-      todoList.push({ name, dueDate, description, imageUrl, quantity });
-      localStorage.setItem('todoList', JSON.stringify(todoList));
+      medicinesList.push({ name, dueDate, description, imageUrl, quantity });
+      localStorage.setItem('medicinesList', JSON.stringify(medicinesList));
       inputElement.value = '';
       descriptionInputElement.value = '';
       dateInputElement.value = '';
-      document.querySelector('.js-todo-image-input').value = '';
+      document.querySelector('.js-medicines-image-input').value = '';
       quantityInputElement.value = '';
-      renderTodoList();
-      //renderTodoList();
+      renderMedicinesList();
+     
     };
     reader.readAsDataURL(imageFile);
   } else {
-    todoList.push({ name, dueDate, description, imageUrl: '', quantity });
-    localStorage.setItem('todoList', JSON.stringify(todoList));
+    medicinesList.push({ name, dueDate, description, imageUrl: '', quantity });
+    localStorage.setItem('medicinesList', JSON.stringify(medicinesList));
     inputElement.value = '';
     descriptionInputElement.value = '';
     dateInputElement.value = '';
-    document.querySelector('.js-todo-image-input').value = '';
+    document.querySelector('.js-medicines-image-input').value = '';
     quantityInputElement.value = '';
-    renderTodoList();
-    //renderTodoList();
+    renderMedicinesList();
+   
   }
 }
 
