@@ -236,6 +236,14 @@ body{
   .filter-todo-show{
     grid-template-columns: repeat(2, 223px);
   }
+
+  
+  .navbar{
+    font-size: 15px;
+    padding: 5px 5px;
+    width: 100%;
+  }
+
 }
 
 
