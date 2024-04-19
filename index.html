@@ -25,19 +25,26 @@
 
       <div class="medicines-input-grid">
 
-        <input placeholder="Brand Name" class="js-name-input name-input">
+        <input placeholder="Brand Name" id="nameInput" class="js-name-input name-input">
     
-        <input type="text" class="js-due-date-input due-date-input" placeholder="Expiry Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
+        <input type="text" id="dateInput" class="js-due-date-input due-date-input" placeholder="Expiry Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
 
-        <textarea placeholder="Compound description" class="js-description-input description-input"></textarea>
-        <input type="file" class="js-medicines-image-input image-input" accept="image/*">
-        <input type="number" class="js-quantity-input quantity-input" placeholder="Quantity">
+        <textarea placeholder="Remedy For/ Doses per day" id="descriptionInput" class="js-description-input description-input"></textarea>
+
+        <input type="file" class="js-medicines-image-input image-input" id="imageInput"   accept="image/*">
+
+        <input type="number" class="js-quantity-input quantity-input" id="quantityInput" placeholder="Quantity">
 
    
 
-        <button class="add-medicines-button js-add-medicines-button">
-         Add
+        <button class="add-medicines-button js-add-regular-medicines-button">
+         + Regular
        </button>
+
+       
+       <button class="add-medicines-button js-add-medicines-button">
+        + occasi
+      </button>
       
       </div>
 
@@ -54,13 +61,13 @@
 
     <div class="filter-container">
       <div class="filter-section">
-        <input type="text" class="js-filter-name-input filter-name-input" placeholder="Filter by name">
-        <input type="text" class="js-filter-date-input filter-date-input" placeholder="Expiry Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
+        <input type="text" id="filterNameInput" class="js-filter-name-input filter-name-input" placeholder="Filter by name">
+        <input type="text" id="filterDateInput" class="js-filter-date-input filter-date-input" placeholder="Expiry Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
         <button class="filter-button js-filter-button">Filter</button>
       </div>
      
     
-      <div class="js-filter-medicines filter-medicines-show">
+      <div  class="js-filter-medicines filter-medicines-show">
 
       </div>
     
