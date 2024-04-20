@@ -30,6 +30,19 @@ body{
   margin-bottom: 30px;
 }
 
+.speech-button{
+  padding: 20px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.speech-button-pressed {
+  background-color: #0078D4; /* Change it to the color you want */
+  color: white; /* Change it to the color you want */
+}
+
 
 
 
@@ -118,6 +131,8 @@ body{
   outline: none;
   padding-left: 10px;
 }
+
+
 .image-input{
   color: black;
   font-weight: bold;

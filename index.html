@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style/index.css">
   <title>Document</title>
 </head>
@@ -13,6 +15,7 @@
   </div>
 
   <div class="summary-section">
+    <button class="js-speech-button speech-button"><i class="fa-solid fa-2x fa-microphone"></i></button>
     <p class="total-medicines">Total Medicines: <span class="js-total-medicines"></span></p>
     <br>
     <p class="earliest-expiry"><span class="js-earliest-expiry"></span></p>
@@ -27,9 +30,9 @@
 
         <input placeholder="Brand Name" id="nameInput" class="js-name-input name-input">
     
-        <input type="text" id="dateInput" class="js-due-date-input due-date-input" placeholder="Expiry Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
+        <input type="text" id="dateInput" class="js-due-date-input due-date-input" placeholder="Due Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
 
-        <textarea placeholder="Remedy For/ Doses per day" id="descriptionInput" class="js-description-input description-input"></textarea>
+        <textarea placeholder="Remedy For" id="descriptionInput" class="js-description-input description-input"></textarea>
 
         <input type="file" class="js-medicines-image-input image-input" id="imageInput"   accept="image/*">
 
@@ -37,13 +40,11 @@
 
    
 
-        <button class="add-medicines-button js-add-regular-medicines-button">
-         + Regular
-       </button>
+      
 
        
        <button class="add-medicines-button js-add-medicines-button">
-        + occasi
+        Add
       </button>
       
       </div>
@@ -62,7 +63,7 @@
     <div class="filter-container">
       <div class="filter-section">
         <input type="text" id="filterNameInput" class="js-filter-name-input filter-name-input" placeholder="Filter by name">
-        <input type="text" id="filterDateInput" class="js-filter-date-input filter-date-input" placeholder="Expiry Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
+        <input type="text" id="filterDateInput" class="js-filter-date-input filter-date-input" placeholder="Due Date" onfocus="(this.type='date')"  onblur="(this.type='text')">
         <button class="filter-button js-filter-button">Filter</button>
       </div>
      
@@ -81,8 +82,10 @@
 
 
 
-<script type="module" src="src/ui.js"></script>
+
 </body>
+
+<script type="module" src="src/ui.js"></script>
 </html>
 
 

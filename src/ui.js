@@ -3,7 +3,6 @@
 import { applyFilter, deleteMedicines, editMedicines, addMedicines } from "./action.js";
 
 
-
 //export const medicinesList = JSON.parse(localStorage.getItem('medicinesList')) || [];
 
 
@@ -12,10 +11,8 @@ const filterMedicineInputDisplay = document.querySelector('.js-filter-medicines'
 const totalMedicineDisplay = document.querySelector('.js-total-medicines');
 const earliestExpiryDisplay = document.querySelector('.js-earliest-expiry');
 const medicinesInputDisplay = document.querySelector('.js-medicines-grid-display');
-const deleteButtonAll =  document.querySelectorAll('.js-delete-medicines-button');
-const editButtonAll =  document.querySelectorAll('.js-edit-medicines-button');
 const addButton = document.querySelector('.js-add-medicines-button');
-const addRegularMedicineButton = document.querySelector('.js-add-regular-medicines-button');
+
 
 
 
@@ -30,6 +27,7 @@ function loadFromStorage() {
 }
 
 renderMedicinesList();
+
 
 
 
@@ -107,13 +105,13 @@ export function renderMedicinesList() {
 
   
 
-  deleteButtonAll.forEach((deleteButton, index) => {
+  document.querySelectorAll('.js-delete-medicines-button').forEach((deleteButton, index) => {
    deleteButton.addEventListener('click', () => {
       deleteMedicines(index);
    });
   });
 
-  editButtonAll.forEach((editButton, index) => {
+  document.querySelectorAll('.js-edit-medicines-button').forEach((editButton, index) => {
    editButton.addEventListener('click', () => {
       editMedicines(index);
    });
@@ -129,3 +127,5 @@ export function renderMedicinesList() {
  export function saveToStorage (){
   localStorage.setItem('medicinesList', JSON.stringify(medicinesList));
  }
+
+
