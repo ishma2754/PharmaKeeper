@@ -1,9 +1,10 @@
 
 
 import { applyFilter, deleteMedicines, editMedicines, addMedicines } from "./action.js";
-
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 //export const medicinesList = JSON.parse(localStorage.getItem('medicinesList')) || [];
+
 
 
 const filterButton = document.querySelector('.js-filter-button');
@@ -14,6 +15,9 @@ const medicinesInputDisplay = document.querySelector('.js-medicines-grid-display
 const addButton = document.querySelector('.js-add-medicines-button');
 
 
+const today = dayjs();
+const todayDate = today.format('YYYY-MM-DD');
+console.log(todayDate);
 
 
 // Call the function to load data from storage
@@ -26,7 +30,11 @@ function loadFromStorage() {
   return JSON.parse(localStorage.getItem('medicinesList')) || [];
 }
 
+let notifications = [];
+
 renderMedicinesList();
+
+checkDueDates();
 
 
 
@@ -103,6 +111,7 @@ export function renderMedicinesList() {
   renderSummary(medicinesList);
 
 
+
   
 
   document.querySelectorAll('.js-delete-medicines-button').forEach((deleteButton, index) => {
@@ -121,6 +130,7 @@ export function renderMedicinesList() {
 
  addButton.addEventListener('click', () => {
     addMedicines();
+   
  });
 
 
@@ -128,4 +138,31 @@ export function renderMedicinesList() {
   localStorage.setItem('medicinesList', JSON.stringify(medicinesList));
  }
 
+
+
+
+export function checkDueDates() {
+  // Clear existing notifications
+  notifications.forEach(notification => notification.close());
+  notifications = [];
+
+  const today = dayjs();
+  const todayDate = today.format('YYYY-MM-DD');
+
+  medicinesList.forEach(medicine => {
+    if (medicine.dueDate === todayDate) {
+      const notification = new Notification(`Due date is today for ${medicine.name}`);
+      notifications.push(notification);
+    }
+  });
+}
+
+
+ /*export function checkDueDates() {
+  medicinesList.forEach(medicine => {
+    if (medicine.dueDate === todayDate) {
+      const notification = new Notification(`Due date is today for ${medicine.name}`);
+    }
+  });
+}*/
 

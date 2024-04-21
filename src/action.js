@@ -1,6 +1,6 @@
 
 
-import { medicinesList, saveToStorage, renderFilterList, renderMedicinesList } from "./ui.js";
+import { medicinesList, saveToStorage, renderFilterList, renderMedicinesList, checkDueDates } from "./ui.js";
 
 
 
@@ -38,17 +38,20 @@ export function applyFilter() {
     medicinesList.splice(index, 1);
     saveToStorage();
     renderMedicinesList();
+    checkDueDates();
     applyFilter();
+
   }
         
   export function editMedicines(index) {
-    console.log('edit button:', medicinesList);
+    
     const medicinesToEdit = medicinesList[index];
-    console.log('edit button:', medicinesToEdit);
 
     populateInputFields(medicinesToEdit);
     console.log('populate:', medicinesToEdit);
     deleteMedicines(index);
+    checkDueDates();
+    
     
     function populateInputFields(medicines) {
       nameInputElement.value = medicines.name;
@@ -105,15 +108,9 @@ export function applyFilter() {
         saveToStorage();
         resetInputFields();
         renderMedicinesList();
-       
+        checkDueDates();
       };
       reader.readAsDataURL(imageFile);
-    } else {
-      medicinesList.push({ name, dueDate, description, imageUrl:'', quantity });
-      saveToStorage();
-      resetInputFields();
-      renderMedicinesList();
-     
     }
   }
 
