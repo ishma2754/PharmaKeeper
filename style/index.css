@@ -43,6 +43,17 @@ body{
   color: white; /* Change it to the color you want */
 }
 
+.details.expired
+{
+  border: 1px solid rgb(185, 126, 126);
+  background-color: rgb(185, 126, 126);
+}
+
+.details.due-today{
+  border: 1px solid lightgreen;
+  background-color: lightgreen;
+}
+
 
 
 

@@ -32,6 +32,11 @@ function loadFromStorage() {
 
 let notifications = [];
 
+
+
+
+
+
 renderMedicinesList();
 
 checkDueDates();
@@ -93,8 +98,25 @@ export function renderFilterList(filteredMedicines = medicinesList) {
 export function renderMedicinesList() {
   const medicinesListHTML = medicinesList.map((medicinesObject, index) => {
     const { name, dueDate, description, imageUrl, quantity  } = medicinesObject;
+
+    const dueDateObj = dayjs(dueDate);
+
+    const isDue = dueDateObj.isBefore(todayDate, 'day'); 
+   
+    const isToday = dueDateObj.isSame(todayDate, 'day'); 
+    
+  
+
+
+    let expiredClass = '';
+    if (isDue) {
+      expiredClass = 'expired';
+    } else if (isToday) {
+      expiredClass = 'due-today';
+    }
+
     return `
-    <div class="details">
+    <div class="details  ${expiredClass}">
       <div class="brand-name-display">${name}</div> 
       <div class="due-date-name-display">${dueDate}</div>
       <div class="description-display">${description}</div>
@@ -142,27 +164,25 @@ export function renderMedicinesList() {
 
 
 export function checkDueDates() {
-  // Clear existing notifications
+  
   notifications.forEach(notification => notification.close());
   notifications = [];
 
-  const today = dayjs();
-  const todayDate = today.format('YYYY-MM-DD');
+  
 
   medicinesList.forEach(medicine => {
-    if (medicine.dueDate === todayDate) {
+    const dueDate = dayjs(medicine.dueDate);
+    if (dueDate.isSame(todayDate, 'day')) {
       const notification = new Notification(`Due date is today for ${medicine.name}`);
+      notifications.push(notification);
+    } else if (dueDate.isBefore(todayDate, 'day')) {
+      const notification = new Notification(`The due date has passed for ${medicine.name}.`);
       notifications.push(notification);
     }
   });
+
+ 
 }
 
 
- /*export function checkDueDates() {
-  medicinesList.forEach(medicine => {
-    if (medicine.dueDate === todayDate) {
-      const notification = new Notification(`Due date is today for ${medicine.name}`);
-    }
-  });
-}*/
-
+ 

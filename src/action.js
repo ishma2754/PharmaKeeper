@@ -161,7 +161,13 @@ function populateInputFieldsFromSpeech(transcript) {
     
   } else if (transcript.includes('filter due date')) {
     const dueDate = extractValue(transcript, 'filter due date');
-    dateFilterElement.value = dueDate;
+    dateFilterElement.value = convertDueDate(transcript);
+    if (formattedDueDate) {
+      dateInputElement.value = formattedDueDate; // Set the formatted due date
+    } else {
+      console.error('Invalid due date format detected in transcript:', dueDate);
+      // Handle the case where the due date format is invalid
+    }
    
   } else {
 
@@ -197,7 +203,7 @@ function populateInputFieldsFromSpeech(transcript) {
   
 }
 
-// Function to extract value after a keyword
+
 function extractValue(text, keyword) {
   const keywordIndex = text.indexOf(keyword);
   if (keywordIndex !== -1) {
