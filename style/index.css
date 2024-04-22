@@ -6,7 +6,7 @@
 
 body{
   font-family: sans-serif;
-  background-color:  lightgrey;
+  background-color: #26A69A;
   color: black;
 }
 
@@ -46,12 +46,12 @@ body{
 .details.expired
 {
   border: 1px solid rgb(185, 126, 126);
-  background-color: rgb(185, 126, 126);
+  background-color: #FFCDD2;
 }
 
 .details.due-today{
   border: 1px solid lightgreen;
-  background-color: lightgreen;
+  background-color: #C8E6C9;
 }
 
 
@@ -81,7 +81,7 @@ body{
 
 
 .details{
-  background-color: white;
+  background-color: lightgrey;
   border: 2px solid #212529;
   border-radius: 4px;
   display: flex;
@@ -110,11 +110,11 @@ body{
 }
 
 .earliest-name{
-  color: red;
+  color: white ;
 }
 
 .earliest-date{
-  color: red;
+  color: white;
 }
 
 .name-input,
@@ -223,14 +223,14 @@ body{
 }
 
 .due-date-name-display{
-  color: red;
+  color: black;
   font-weight: bold;
   font-size: 18px;
 }
 
 .add-medicines-button,
 .filter-button{
-  background-color: green;
+  background-color: orange;
   color: white;
   padding: 6px;
   border: none;
