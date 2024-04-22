@@ -1,6 +1,7 @@
 
 
 import { medicinesList, saveToStorage, renderFilterList, renderMedicinesList, checkDueDates } from "./ui.js";
+import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 
 
@@ -14,11 +15,14 @@ const speechButton = document.querySelector('.js-speech-button');
 
 const nameFilterElement = document.getElementById('filterNameInput');
 const dateFilterElement = document.getElementById('filterDateInput');
+const filterMedicineInputDisplay = document.querySelector('.js-filter-medicines');
 
 
 export function applyFilter() {
   const nameFilter = nameFilterElement.value.toLowerCase();
   const dateFilter = dateFilterElement.value;
+
+  filterMedicineInputDisplay.innerHTML = '';
 
 
   const filteredMedicines = medicinesList.filter(medicines => {
@@ -29,6 +33,8 @@ export function applyFilter() {
 
     nameFilterElement.value = '';
     dateFilterElement.value = '';
+
+    
 
     renderFilterList(filteredMedicines);
  };
@@ -146,14 +152,6 @@ recognition.onend = function() {
 
 
 function populateInputFieldsFromSpeech(transcript) {
-  const nameInputElement = document.getElementById('nameInput');
-  const dateInputElement = document.getElementById('dateInput');
-  const descriptionInputElement = document.getElementById('descriptionInput');
-  const quantityInputElement = document.getElementById('quantityInput');
-
-  const nameFilterElement = document.getElementById('filterNameInput');
-  const dateFilterElement = document.getElementById('filterDateInput');
-
 
   if (transcript.includes('filter brand name')) {
     const brandName = extractValue(transcript, 'filter brand name');
@@ -183,7 +181,14 @@ function populateInputFieldsFromSpeech(transcript) {
         dateInputElement.value = formattedDueDate; // Set the formatted due date
       } else {
         console.error('Invalid due date format detected in transcript:', dueDate);
-        // Handle the case where the due date format is invalid
+      }
+    } else if (transcript.includes('filter due date in')) {
+      const days = extractValue(transcript, 'filter due date in');
+      if (!isNaN(days)) {
+        const dueDate = convertDueDate(transcript);
+        dateFilterElement.value = dueDate;
+      } else {
+        console.error('Invalid number of days detected in the transcript:', days);
       }
 
     }
@@ -218,7 +223,19 @@ function extractValue(text, keyword) {
 
 
 
+
+
+
 function convertDueDate(transcript) {
+
+  const relativeDateRegex = /in\s+(\d+)\s+days?/i;
+  const relativeDateMatch = transcript.match(relativeDateRegex);
+
+  if (relativeDateMatch) {
+    const daysToAdd = parseInt(relativeDateMatch[1]);
+    const dueDate = dayjs().add(daysToAdd, 'day').format('YYYY-MM-DD');
+    return dueDate;
+  }
 
   const dateRegex = /(\d{1,2})(?:st|nd|rd|th)?\s*(?:of)?\s*(january|february|march|april|may|june|july|august|september|october|november|december)\s*(\d{2,4})/i;
 
