@@ -39,7 +39,7 @@ let notifications = [];
 
 renderMedicinesList();
 
-checkDueDates();
+//checkDueDates();
 
 
 
@@ -105,8 +105,6 @@ export function renderMedicinesList() {
    
     const isToday = dueDateObj.isSame(todayDate, 'day'); 
     
-  
-
 
     let expiredClass = '';
     if (isDue) {
@@ -162,7 +160,7 @@ export function renderMedicinesList() {
 
 
 
-
+/*
 export function checkDueDates() {
   
   notifications.forEach(notification => notification.close());
@@ -184,5 +182,5 @@ export function checkDueDates() {
  
 }
 
-
+*/
  

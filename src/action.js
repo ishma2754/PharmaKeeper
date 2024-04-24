@@ -1,21 +1,15 @@
+import { medicinesList, saveToStorage, renderFilterList, renderMedicinesList } from "./ui.js";
+import { populateInputFieldsFromSpeech} from "./utils/speechutils.js";
 
-
-import { medicinesList, saveToStorage, renderFilterList, renderMedicinesList, checkDueDates } from "./ui.js";
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-
-
-
-
-const nameInputElement = document.getElementById('nameInput');
-const dateInputElement = document.getElementById('dateInput');
-const descriptionInputElement = document.getElementById('descriptionInput');
-const quantityInputElement = document.getElementById('quantityInput');
+export const nameInputElement = document.getElementById('nameInput');
+export const dateInputElement = document.getElementById('dateInput');
+export const descriptionInputElement = document.getElementById('descriptionInput');
+export const quantityInputElement = document.getElementById('quantityInput');
+export const nameFilterElement = document.getElementById('filterNameInput');
+export const dateFilterElement = document.getElementById('filterDateInput');
+const filterMedicineInputDisplay = document.querySelector('.js-filter-medicines');
 const imageInputElement = document.getElementById('imageInput');
 const speechButton = document.querySelector('.js-speech-button');
-
-const nameFilterElement = document.getElementById('filterNameInput');
-const dateFilterElement = document.getElementById('filterDateInput');
-const filterMedicineInputDisplay = document.querySelector('.js-filter-medicines');
 
 
 export function applyFilter() {
@@ -44,7 +38,7 @@ export function applyFilter() {
     medicinesList.splice(index, 1);
     saveToStorage();
     renderMedicinesList();
-    checkDueDates();
+    //checkDueDates();
     applyFilter();
 
   }
@@ -56,7 +50,7 @@ export function applyFilter() {
     populateInputFields(medicinesToEdit);
     console.log('populate:', medicinesToEdit);
     deleteMedicines(index);
-    checkDueDates();
+    //checkDueDates();
     
     
     function populateInputFields(medicines) {
@@ -102,11 +96,6 @@ export function applyFilter() {
       alert("Please fill in all the fields.");
       return; 
     }
-  
-
-
-  
-    if (imageFile) {
       const reader = new FileReader();
       reader.onload = function(e) {
         const imageUrl = e.target.result;
@@ -114,159 +103,41 @@ export function applyFilter() {
         saveToStorage();
         resetInputFields();
         renderMedicinesList();
-        checkDueDates();
+        //checkDueDates();
       };
       reader.readAsDataURL(imageFile);
-    }
-  }
-
-
-const recognition = new webkitSpeechRecognition();
-recognition.continuous = false;
-recognition.lang = 'en-US';
-
-
-
-recognition.onresult = function(event) {
-
-  const transcript = event.results[0][0].transcript.trim().toLowerCase();
-
-  populateInputFieldsFromSpeech(transcript); 
-};
-
-recognition.onerror = function(event) {
-  console.error('Speech recognition error:', event.error);
-};
-
-
-
-speechButton.addEventListener('click', () => {
-  recognition.start();
-  speechButton.classList.add('speech-button-pressed');
-});
-
-recognition.onend = function() {
- 
-  speechButton.classList.remove('speech-button-pressed');
-};
-
-
-function populateInputFieldsFromSpeech(transcript) {
-
-  if (transcript.includes('filter brand name')) {
-    const brandName = extractValue(transcript, 'filter brand name');
-    nameFilterElement.value = brandName;
-    
-  } else if (transcript.includes('filter due date')) {
-    const dueDate = extractValue(transcript, 'filter due date');
-    dateFilterElement.value = convertDueDate(transcript);
-    if (formattedDueDate) {
-      dateInputElement.value = formattedDueDate; // Set the formatted due date
-    } else {
-      console.error('Invalid due date format detected in transcript:', dueDate);
-      // Handle the case where the due date format is invalid
-    }
-   
-  } else {
-
-
-  if (transcript.includes('brand name')) {
-    const brandName = extractValue(transcript, 'brand name');
-    nameInputElement.value = brandName;
-  }
-    if (transcript.includes('due date')) {
-      const dueDate = extractValue(transcript, 'due date');
-      const formattedDueDate = convertDueDate(transcript); // Call convertDueDate function
-      if (formattedDueDate) {
-        dateInputElement.value = formattedDueDate; // Set the formatted due date
-      } else {
-        console.error('Invalid due date format detected in transcript:', dueDate);
-      }
-    } else if (transcript.includes('filter due date in')) {
-      const days = extractValue(transcript, 'filter due date in');
-      if (!isNaN(days)) {
-        const dueDate = convertDueDate(transcript);
-        dateFilterElement.value = dueDate;
-      } else {
-        console.error('Invalid number of days detected in the transcript:', days);
-      }
-
-    }
-       
-
-  }
-
-  if (transcript.includes('quantity')) {
-    const quantity = extractValue(transcript, 'quantity');
-    quantityInputElement.value = quantity;
-  }
-  if (transcript.includes('description')) {
-    const description = extractValue(transcript, 'description');
-    descriptionInputElement.value = description;
-  }
-
+    };
   
-}
 
 
-function extractValue(text, keyword) {
-  const keywordIndex = text.indexOf(keyword);
-  if (keywordIndex !== -1) {
-    const value = text.slice(keywordIndex + keyword.length).trim();
-    return value;
-  }
-  return '';
-
+    const recognition = new webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.lang = 'en-US'; 
+    
   
-}
-
-
-
-
-
-
-
-function convertDueDate(transcript) {
-
-  const relativeDateRegex = /in\s+(\d+)\s+days?/i;
-  const relativeDateMatch = transcript.match(relativeDateRegex);
-
-  if (relativeDateMatch) {
-    const daysToAdd = parseInt(relativeDateMatch[1]);
-    const dueDate = dayjs().add(daysToAdd, 'day').format('YYYY-MM-DD');
-    return dueDate;
-  }
-
-  const dateRegex = /(\d{1,2})(?:st|nd|rd|th)?\s*(?:of)?\s*(january|february|march|april|may|june|july|august|september|october|november|december)\s*(\d{2,4})/i;
-
- 
-  const match = transcript.match(dateRegex);
-  if (match) {
-    const day = parseInt(match[1]);
-    const monthName = match[2];
-    const year = parseInt(match[3]);
-
+    recognition.onresult = function(event) {
+  
+      const transcript = event.results[0][0].transcript.trim().toLowerCase();
     
-    const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-    const monthIndex = months.indexOf(monthName.toLowerCase()) + 1;
-
-    
-    if (!isNaN(day) && !isNaN(monthIndex) && !isNaN(year)) {
+      populateInputFieldsFromSpeech(transcript); 
       
-      const date = new Date(year, monthIndex - 1, day);
-      return date.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    } else {
-      alert('Invalid month name detected in the transcript.');
-      return null;
-    }
-  } else {
-    alert('The transcript does not consist of a complete date (day, month, and year).');
-    return null;
-  }
-
- 
-  };
-
+      };
+    
+    recognition.onerror = function(event) {
+      console.error('Speech recognition error:', event.error);
+    };
+    
+    
+    
+    speechButton.addEventListener('click', () => {
+      recognition.start();
+      speechButton.classList.add('speech-button-pressed');
+    });
+    
+    recognition.onend = function() {
+     
+      speechButton.classList.remove('speech-button-pressed');
+    };
 
 
 
