@@ -36,6 +36,7 @@ body{
   border: none;
   cursor: pointer;
   margin-bottom: 10px;
+  background-color: white;
 }
 
 .speech-button-pressed {
@@ -45,12 +46,10 @@ body{
 
 .details.expired
 {
-  border: 1px solid rgb(185, 126, 126);
   background-color: #FFCDD2;
 }
 
 .details.due-today{
-  border: 1px solid lightgreen;
   background-color: #C8E6C9;
 }
 
@@ -81,9 +80,8 @@ body{
 
 
 .details{
-  background-color: lightgrey;
-  border: 2px solid #212529;
-  border-radius: 4px;
+  background-color: lightgray;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -105,7 +103,6 @@ body{
 .image-container{
   height: 220px; 
   width: 100%; 
-  background-color: #f0f0f0;
   
 }
 

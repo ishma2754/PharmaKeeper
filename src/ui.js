@@ -1,18 +1,18 @@
 
 
-import { applyFilter, deleteMedicines, editMedicines, addMedicines } from "./action.js";
+import { applyFilter, deleteMedicines, editMedicines, addMedicines, resetInputFields } from "./action.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 
 //export const medicinesList = JSON.parse(localStorage.getItem('medicinesList')) || [];
 
 
-
+export const filterMedicineInputDisplay = document.querySelector('.js-filter-medicines');
 const filterButton = document.querySelector('.js-filter-button');
-const filterMedicineInputDisplay = document.querySelector('.js-filter-medicines');
 const totalMedicineDisplay = document.querySelector('.js-total-medicines');
 const earliestExpiryDisplay = document.querySelector('.js-earliest-expiry');
-const medicinesInputDisplay = document.querySelector('.js-medicines-grid-display');
+export const medicinesInputDisplay = document.querySelector('.js-medicines-grid-display');
 const addButton = document.querySelector('.js-add-medicines-button');
+
 
 
 const today = dayjs();
@@ -30,7 +30,7 @@ function loadFromStorage() {
   return JSON.parse(localStorage.getItem('medicinesList')) || [];
 }
 
-let notifications = [];
+//let notifications = [];
 
 
 
@@ -45,7 +45,10 @@ renderMedicinesList();
 
 
 filterButton.addEventListener('click', () => {
+
+  filterMedicineInputDisplay.innerHTML = '';
   applyFilter();
+
 });
 
 
@@ -150,6 +153,7 @@ export function renderMedicinesList() {
 
  addButton.addEventListener('click', () => {
     addMedicines();
+    
    
  });
 

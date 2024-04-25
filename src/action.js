@@ -1,4 +1,4 @@
-import { medicinesList, saveToStorage, renderFilterList, renderMedicinesList } from "./ui.js";
+import { medicinesList, saveToStorage, renderFilterList, renderMedicinesList, filterMedicineInputDisplay } from "./ui.js";
 import { populateInputFieldsFromSpeech} from "./utils/speechutils.js";
 
 export const nameInputElement = document.getElementById('nameInput');
@@ -7,16 +7,14 @@ export const descriptionInputElement = document.getElementById('descriptionInput
 export const quantityInputElement = document.getElementById('quantityInput');
 export const nameFilterElement = document.getElementById('filterNameInput');
 export const dateFilterElement = document.getElementById('filterDateInput');
-const filterMedicineInputDisplay = document.querySelector('.js-filter-medicines');
 const imageInputElement = document.getElementById('imageInput');
 const speechButton = document.querySelector('.js-speech-button');
+
 
 
 export function applyFilter() {
   const nameFilter = nameFilterElement.value.toLowerCase();
   const dateFilter = dateFilterElement.value;
-
-  filterMedicineInputDisplay.innerHTML = '';
 
 
   const filteredMedicines = medicinesList.filter(medicines => {
@@ -28,7 +26,6 @@ export function applyFilter() {
     nameFilterElement.value = '';
     dateFilterElement.value = '';
 
-    
 
     renderFilterList(filteredMedicines);
  };
@@ -40,7 +37,7 @@ export function applyFilter() {
     renderMedicinesList();
     //checkDueDates();
     applyFilter();
-
+    filterMedicineInputDisplay.innerHTML = '';
   }
         
   export function editMedicines(index) {
@@ -68,7 +65,7 @@ export function applyFilter() {
 
 
 
-  function resetInputFields() {
+ export function resetInputFields() {
     nameInputElement.value = '';
     descriptionInputElement.value = '';
     dateInputElement.value = '';
@@ -78,6 +75,7 @@ export function applyFilter() {
 
 
   export function addMedicines() {
+    
 
     console.log(medicinesList);
    
@@ -103,9 +101,12 @@ export function applyFilter() {
         saveToStorage();
         resetInputFields();
         renderMedicinesList();
+       
         //checkDueDates();
       };
       reader.readAsDataURL(imageFile);
+      
+ 
     };
   
 
