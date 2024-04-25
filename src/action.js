@@ -90,8 +90,8 @@ export function applyFilter() {
   
     const quantity = quantityInputElement.value;
 
-    if (!name || !dueDate || !description || !quantity || !imageFile) {
-      alert("Please fill in all the fields.");
+    if (!name || !dueDate) {
+      alert("Please fill in both brand name and due date fields.");
       return; 
     }
       const reader = new FileReader();
