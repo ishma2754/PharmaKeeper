@@ -57,6 +57,7 @@ export function applyFilter() {
       
       descriptionInputElement.value = medicines.description;
 
+    
       quantityInputElement.value = medicines.quantity;
     }
 
@@ -94,6 +95,9 @@ export function applyFilter() {
       alert("Please fill in both brand name and due date fields.");
       return; 
     }
+
+    
+    if (imageFile) {
       const reader = new FileReader();
       reader.onload = function(e) {
         const imageUrl = e.target.result;
@@ -102,10 +106,16 @@ export function applyFilter() {
         resetInputFields();
         renderMedicinesList();
        
-        //checkDueDates();
       };
       reader.readAsDataURL(imageFile);
-      
+    } else {
+      medicinesList.push({ name, dueDate, description, imageUrl: '', quantity });
+      saveToStorage();
+      resetInputFields();
+      renderMedicinesList();
+     
+    }
+    
  
     };
   
