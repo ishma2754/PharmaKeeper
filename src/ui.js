@@ -1,7 +1,8 @@
 
 
-import { applyFilter, deleteMedicines, editMedicines, addMedicines, resetInputFields } from "./action.js";
+import { applyFilter, deleteMedicines, editMedicines, addMedicines, resetInputFields, dateInputElement } from "./action.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+
 
 //export const medicinesList = JSON.parse(localStorage.getItem('medicinesList')) || [];
 
@@ -19,6 +20,22 @@ const today = dayjs();
 const todayDate = today.format('YYYY-MM-DD');
 console.log(todayDate);
 
+const isDateInputSupported = () => {
+  const input = document.createElement('input');
+  input.setAttribute('type', 'date');
+  return input.type !== 'text';
+};
+
+if (isDateInputSupported()) {
+  dateInputElement.setAttribute('type', 'date');
+}
+
+if (!isDateInputSupported()) {
+  flatpickr(dateInputElement, {
+    enableTime: false,
+    dateFormat: 'Y-m-d',
+  });
+}
 
 // Call the function to load data from storage
 export const medicinesList = loadFromStorage();
@@ -90,10 +107,10 @@ export function renderFilterList(filteredMedicines = medicinesList) {
     }
   
     return medicinesList.reduce((earliest, currentMedicines) => {
-      const earliestDueDate = new Date(earliest.dueDate);
-      const currentDueDate = new Date(currentMedicines.dueDate);
-      return earliestDueDate < currentDueDate ? earliest : currentMedicines;
-    });
+      const earliestDueDate = dayjs(earliest.dueDate);
+      const currentDueDate = dayjs(currentMedicines.dueDate);
+      return earliestDueDate.isBefore(currentDueDate) ? earliest : currentMedicines;
+  });
   }
   
   renderSummary(medicinesList);
