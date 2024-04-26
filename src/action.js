@@ -96,7 +96,21 @@ export function applyFilter() {
       return; 
     }
 
-    
+
+    if (imageFile) {
+      const imageUrl = URL.createObjectURL(imageFile); // Create URL for the image file
+      medicinesList.push({ name, dueDate, description, imageUrl, quantity });
+      saveToStorage();
+      resetInputFields();
+      renderMedicinesList();
+  } else {
+      medicinesList.push({ name, dueDate, description, imageUrl: '', quantity });
+      saveToStorage();
+      resetInputFields();
+      renderMedicinesList();
+  }
+
+    /*
     if (imageFile) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -115,9 +129,19 @@ export function applyFilter() {
       renderMedicinesList();
      
     }
+*/
+    
+
+
+
+    
+
+  
+
+};
     
  
-    };
+  
   
 
 

@@ -20,22 +20,6 @@ const today = dayjs();
 const todayDate = today.format('YYYY-MM-DD');
 console.log(todayDate);
 
-const isDateInputSupported = () => {
-  const input = document.createElement('input');
-  input.setAttribute('type', 'date');
-  return input.type !== 'text';
-};
-
-if (isDateInputSupported()) {
-  dateInputElement.setAttribute('type', 'date');
-}
-
-if (!isDateInputSupported()) {
-  flatpickr(dateInputElement, {
-    enableTime: false,
-    dateFormat: 'Y-m-d',
-  });
-}
 
 // Call the function to load data from storage
 export const medicinesList = loadFromStorage();
