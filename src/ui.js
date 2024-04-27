@@ -27,9 +27,13 @@ export const medicinesList = loadFromStorage();
 
 
 
+
+
 function loadFromStorage() {
-  return JSON.parse(localStorage.getItem('medicinesList')) || [];
-}
+   return JSON.parse(localStorage.getItem('medicinesList')) || [];
+  }
+  
+
 
 //let notifications = [];
 
@@ -116,6 +120,7 @@ export function renderMedicinesList() {
     } else if (isToday) {
       expiredClass = 'due-today';
     }
+
 
     return `
     <div class="details  ${expiredClass}">

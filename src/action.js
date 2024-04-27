@@ -96,21 +96,29 @@ export function applyFilter() {
       return; 
     }
 
-
-    if (imageFile) {
-      const imageUrl = URL.createObjectURL(imageFile); // Create URL for the image file
-      medicinesList.push({ name, dueDate, description, imageUrl, quantity });
-      saveToStorage();
-      resetInputFields();
-      renderMedicinesList();
-  } else {
-      medicinesList.push({ name, dueDate, description, imageUrl: '', quantity });
-      saveToStorage();
-      resetInputFields();
-      renderMedicinesList();
-  }
-
     /*
+    if (imageFile){
+      const url = URL.createObjectURL(imageFile);
+
+      fetch(url)
+      .then(response => response.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onload = function(e){
+          const imageUrl = e.target.result;
+          medicinesList.push({ name, dueDate, description, imageUrl, quantity });
+          saveToStorage();
+          resetInputFields();
+          renderMedicinesList(); 
+        };
+        reader.readAsDataURL(blob);
+      })
+      .catch(error => console.error('error converting', error));
+
+      URL.revokeObjectURL(url);
+    }
+    */
+
     if (imageFile) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -118,8 +126,7 @@ export function applyFilter() {
         medicinesList.push({ name, dueDate, description, imageUrl, quantity });
         saveToStorage();
         resetInputFields();
-        renderMedicinesList();
-       
+        renderMedicinesList(); 
       };
       reader.readAsDataURL(imageFile);
     } else {
@@ -129,21 +136,12 @@ export function applyFilter() {
       renderMedicinesList();
      
     }
-*/
-    
 
-
-
-    
+  }
 
   
-
-};
+  
     
- 
-  
-  
-
 
     const recognition = new webkitSpeechRecognition();
     recognition.continuous = false;
